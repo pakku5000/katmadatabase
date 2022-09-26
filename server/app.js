@@ -2,12 +2,17 @@ const express = require ("express");
 const cors = require("cors");
 const mongoClient = require("mongodb").MongoClient;
 const   assert = require('assert');
-const{ MongoClient, Db, ObjectId } =require('mongodb');
+const { MongoClient, Db, ObjectId } =require('mongodb');
+
+
 
 const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+app.use(cors({
+}
+))
 
 
 
@@ -21,7 +26,8 @@ app.get("/users",(req, res)=>{
     })
 })
 
-app.post("/users", (req, res) => {
+app.post("/users",(req, res) => {
+
     db.collection("users").insertOne(req.body);
     console.log(JSON.stringify(req.body) + "was inserted");
 })
@@ -54,45 +60,8 @@ app.listen(9000, () => {
 
         db = client.db(database)
         console.log("Connected!")
-        
-        db.command( { collMod: "machines",
-validator: {
-    $jsonSchema: {
-        bsonType: "object",
-        required: ["_id"],
-        additionalProperties: false,
-        properties: {
-            _id : {
-                bsonType: "objectId",
-            },
-            operatorId: {
-                bsonType: "string",
-            },
-            date: {
-                bsonType: "date",
-            },
-            name: {
-                bsonType: "string",
-            },
-            telephone: {
-                bsonType: "int",
-            },
-            email: {                  
-                bsonType: "string",  
-            }, 
-            useCount: {
-                bsonType: "int",  
-            },
-            capacity: {
-                bsonType: "int", 
-            },
-            ROI: {
-                bsonType: "int", 
-            },
-         }
-    }
-}
-} )
+          
+
         
     }
     )
