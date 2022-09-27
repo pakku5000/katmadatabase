@@ -13,6 +13,9 @@ validator: {
             userId: {
                 bsonType: "string",
             },
+            email: {
+                bsonType: "string",
+            },
             date: {
                 bsonType: "date",
             },
@@ -32,7 +35,7 @@ validator: {
                 bsonType: "object", // {date : Date, certificate : String, ...}
             },
             validUntil: {
-                bsonType: "date",
+                bsonType: "date", 
             },
          }
     }

@@ -54,6 +54,7 @@ app.post("/operators", (req, res) => {
     console.log(JSON.stringify(req.body) + "was inserted");
 })
 
+
 app.listen(9000, () => {
     mongoClient.connect(connectionString, {useNewUrlParser: true}, (err, client) => {
         assert.equal(null, err);
@@ -61,8 +62,46 @@ app.listen(9000, () => {
         db = client.db(database)
         console.log("Connected!")
           
+        //Validation here
+        db.command( { collMod: "operators",
+validator: {
+    $jsonSchema: {
+        bsonType: "object",
+        required: ["_id"],
+        additionalProperties: false,
+        properties: {
+            _id : {
+                bsonType: "objectId",
+            },
+            operatorId: {
+                bsonType: "string",
+            },
+            date: {
+                bsonType: "date",
+            },
+            name: {
+                bsonType: "string",
+            },
+            telephone: {
+                bsonType: "string",
+            },
+            email: {                  
+                bsonType: "string",  
+            }, 
+            useCount: {
+                bsonType: "int",  
+            },
+            capacity: {
+                bsonType: "int", 
+            },
+            ROI: {
+                bsonType: "int", 
+            },
+         }
+    }
+}
+} )
 
-        
     }
     )
 })

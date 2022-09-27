@@ -1,6 +1,6 @@
 //copy paste in app.js under console.log("Connected!") to modify/run validation
 
-db.command( { collMod: "machines",
+db.command( { collMod: "operators",
 validator: {
     $jsonSchema: {
         bsonType: "object",
@@ -20,7 +20,7 @@ validator: {
                 bsonType: "string",
             },
             telephone: {
-                bsonType: "int",
+                bsonType: "string",
             },
             email: {                  
                 bsonType: "string",  
